@@ -10,4 +10,5 @@ source ~/.sas.ids.zshrc
 source ~/.sas.secrets.zshrc
 source ~/.sas.zshrc
 alias kubility="i ~/repo/"
-alias connect-vpn="sudo tailscale up --operator=$USER --accept-routes=true --advertise-exit-node=false --shields-up=true"
+alias connect-vpn="sudo tailscale up --operator=$USER --accept-routes=true --advertise-exit-node=false --shields-up=true --stateful-filtering"
+alias disconnect-vpn="tailscale down"

@@ -1,11 +1,13 @@
 alias zshconfig="code ~/.zshrc"
 alias i="idea.sh"
-alias linux-setup="i ~/github/linux-setup"
+alias linux-setup="code ~/github/linux-setup"
 alias use-minikube="kubectl config use-context minikube"
 alias sandbox='cd ~/Document/sandbox'
 alias pergaminhos='cd ~/Document/pergaminhos'
 alias tc='cd ~/Code'
 alias reload='source ~/.zshrc'
+alias git-refresh='git checkout main && git pull'
+alias git-push-origin='git push && fuck'
 export PATH="/opt/google/google-cloud-sdk/bin:/opt/idea-IU-231.8109.175/bin:$PATH"
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
