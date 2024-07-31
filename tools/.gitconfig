@@ -1,0 +1,12 @@
+[alias]
+	s = status 
+[core]
+	editor = vim
+[includeIf "gitdir:~/sas/"]
+  path = .gitconfig-sas
+[includeIf "gitdir:~/kg/"]
+  path = .gitconfig-kg
+[init]
+	defaultBranch = main
+[user]
+	email = kim.ae09@gmail.com

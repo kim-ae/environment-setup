@@ -32,3 +32,4 @@
   - sniff
 - brew
 - kubeseal
+- terraform
