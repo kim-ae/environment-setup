@@ -1,0 +1,34 @@
+# cli Tooling
+- Git
+- Docker
+- kubectl
+- kubectx
+- flux
+- kubelogin
+- tailscale
+- k9s
+- code
+- nordpass
+- teams
+- slack
+- discord
+- flameshot
+- zsh
+- oh my zsh
+- p10k
+- google chrome
+- intelij
+- hyper
+- gcloud
+- az
+- discord
+- minikube
+- helm
+- kubectl
+- krew
+  - ingress nginx
+  - krew
+  - rabbitmq
+  - sniff
+- brew
+- kubeseal
