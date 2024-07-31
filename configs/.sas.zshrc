@@ -1,14 +1,14 @@
 copy-context(){
-    cp ~/github/linux-setup/configs/.sas.p10k.zsh ~/.p10k.zsh
-    cp ~/github/linux-setup/configs/sas.kube.config.yaml ~/.kube/config
+    cp $LINUX_SETUP_HOME/linux-setup/configs/.sas.p10k.zsh $HOME/.p10k.zsh
+    cp $LINUX_SETUP_HOME/linux-setup/configs/sas.kube.config.yaml $HOME/.kube/config
 }
 update-context-files(){
-    cp ~/.p10k.zsh ~/github/linux-setup/configs/.sas.p10k.zsh
-    cp ~/.kube/config ~/github/linux-setup/configs/sas.kube.config.yaml
+    cp $HOME/.p10k.zsh $LINUX_SETUP_HOME/linux-setup/configs/.sas.p10k.zsh
+    cp $HOME/.kube/config $LINUX_SETUP_HOME/linux-setup/configs/sas.kube.config.yaml
 }
-source ~/.sas.ids.zshrc
-source ~/.sas.secrets.zshrc
-source ~/.sas.zshrc
-alias kubility="i ~/repo/"
+
+mkdir -p $HOME/sas
+
+alias kubility="code ~/sas/"
 alias connect-vpn="sudo tailscale up --operator=$USER --accept-routes=true --advertise-exit-node=false --shields-up=true --stateful-filtering"
 alias disconnect-vpn="tailscale down"

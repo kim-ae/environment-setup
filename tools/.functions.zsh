@@ -8,7 +8,7 @@ change_customer(){
 print_colors(){
     for c in {0..255}; do
       printf "\033[48;5;%sm%3d\033[0m " "$c" "$c"
-      if (( c == 15 )) || (( c > 15 )) && (( (c-15) % 6 == 0 )); then
+      if discord(( c == 15 )) || (( c > 15 )) && (( (c-15) % 6 == 0 )); then
           printf "\n";
       fi
     done
@@ -16,6 +16,11 @@ print_colors(){
 
 read_certificate(){
     openssl x509 -in $1 -text -noout
+}
+
+load_config(){
+  cp $HOME/$MAIN_FOLDER/linux-setup/tools/.hyper.js $HOME/
+  cp $HOME/$MAIN_FOLDER/linux-setup/tools/.gitconfig* $HOME/
 }
 
 access_node(){

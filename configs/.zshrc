@@ -9,8 +9,9 @@ fi
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="/home/escobar/.oh-my-zsh"
-export LINUX_SETUP_HOME="$HOME/github/linux-setup"
+export ZSH="$HOME/.oh-my-zsh"
+export MAIN_FOLDER="Documents"
+export LINUX_SETUP_HOME="$HOME/$MAIN_FOLDER/linux-setup"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -111,6 +112,7 @@ source $ZSH/oh-my-zsh.sh
 eval $(thefuck --alias)
 source $LINUX_SETUP_HOME/tools/.alias.zsh
 source $LINUX_SETUP_HOME/tools/.functions.zsh
+load_config
 # Generated for envman. Do not edit.
 [ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"
 

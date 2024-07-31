@@ -33,3 +33,12 @@
 - brew
 - kubeseal
 - terraform
+
+# Steps
+1. Install git
+2. Install zsh
+3. Install oh my zsh
+4. install p10k
+5. copy .zshrc
+6. source .zshrc
+7. install tailscale
