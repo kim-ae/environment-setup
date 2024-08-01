@@ -33,6 +33,7 @@
 - brew
 - kubeseal
 - terraform
+- thefuck
 
 # Steps
 1. Install git
