@@ -10,3 +10,5 @@
 	defaultBranch = main
 [user]
 	email = kim.ae09@gmail.com
+[pull]
+	rebase = true

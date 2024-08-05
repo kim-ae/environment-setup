@@ -358,7 +358,7 @@
 
   #####################################[ vcs: git status ]######################################
   # Branch icon. Set this parameter to '\UE0A0 ' for the popular Powerline branch icon.
-  typeset -g POWERLEVEL9K_VCS_BRANCH_ICON=
+  typeset -g POWERLEVEL9K_VCS_BRANCH_ICON=' '
 
   # Untracked files icon. It's really a question mark, your font isn't broken.
   # Change the value of this parameter to show a different icon.
@@ -1292,7 +1292,7 @@
   #############[ kubecontext: current kubernetes context (https://kubernetes.io/) ]#############
   # Show kubecontext only when the command you are typing invokes one of these tools.
   # Tip: Remove the next line to always show kubecontext.
-  typeset -g POWERLEVEL9K_KUBECONTEXT_SHOW_ON_COMMAND='kubectl|helm|kubens|kubectx|oc|istioctl|kogito|k9s|helmfile|flux|flux34|fluxctl|stern|kubeseal|skaffold|kubent|kubecolor|cmctl|sparkctl'
+  typeset -g POWERLEVEL9K_KUBECONTEXT_SHOW_ON_COMMAND='kubectl|helm|kubens|kubectx|oc|istioctl|kogito|k9s|helmfile|flux|flux34|fluxctl|stern|kubeseal|skaffold|kubent|kubecolor|cmctl|sparkctl|k8s*|kube*'
 
   # Kubernetes context classes for the purpose of using different colors, icons and expansions with
   # different contexts.
@@ -1326,16 +1326,17 @@
        '*labs*'  LABS
        '*'       DEFAULT)
   typeset -g POWERLEVEL9K_KUBECONTEXT_DEFAULT_FOREGROUND=134
-  typeset -g POWERLEVEL9K_KUBECONTEXT_DEFAULT_VISUAL_IDENTIFIER_EXPANSION='○'
+  typeset -g POWERLEVEL9K_KUBECONTEXT_DEFAULT_VISUAL_IDENTIFIER_EXPANSION='󱃾'
   typeset -g POWERLEVEL9K_KUBECONTEXT_PROD_FOREGROUND=1
-  typeset -g POWERLEVEL9K_KUBECONTEXT_PROD_VISUAL_IDENTIFIER_EXPANSION='X'
+  #typeset -g POWERLEVEL9K_KUBECONTEXT_PROD_VISUAL_IDENTIFIER_EXPANSION='󱃾'
   typeset -g POWERLEVEL9K_KUBECONTEXT_TEST_FOREGROUND=3
-  typeset -g POWERLEVEL9K_KUBECONTEXT_TEST_VISUAL_IDENTIFIER_EXPANSION='?'
+  #typeset -g POWERLEVEL9K_KUBECONTEXT_TEST_VISUAL_IDENTIFIER_EXPANSION='󱃾'
   typeset -g POWERLEVEL9K_KUBECONTEXT_LABS_FOREGROUND=39
-  typeset -g POWERLEVEL9K_KUBECONTEXT_LABS_VISUAL_IDENTIFIER_EXPANSION='○'
-  typeset -g POWERLEVEL9K_KUBECONTEXT_TEST_CONTENT_EXPANSION=${P9K_KUBECONTEXT_NAME}
-  typeset -g POWERLEVEL9K_KUBECONTEXT_LABS_CONTENT_EXPANSION=${P9K_KUBECONTEXT_NAME}
-  typeset -g POWERLEVEL9K_KUBECONTEXT_PROD_CONTENT_EXPANSION=${P9K_KUBECONTEXT_NAME}
+  #typeset -g POWERLEVEL9K_KUBECONTEXT_LABS_VISUAL_IDENTIFIER_EXPANSION='󱃾'
+  typeset -g POWERLEVEL9K_KUBECONTEXT_DEFAULT_CONTENT_EXPANSION='? ${P9K_CONTENT}'
+  typeset -g POWERLEVEL9K_KUBECONTEXT_TEST_CONTENT_EXPANSION=' ${P9K_CONTENT}'
+  typeset -g POWERLEVEL9K_KUBECONTEXT_LABS_CONTENT_EXPANSION='󰙨 ${P9K_CONTENT}'
+  typeset -g POWERLEVEL9K_KUBECONTEXT_PROD_CONTENT_EXPANSION=' ${P9K_CONTENT}'
 
   # Use POWERLEVEL9K_KUBECONTEXT_CONTENT_EXPANSION to specify the content displayed by kubecontext
   # segment. Parameter expansions are very flexible and fast, too. See reference:

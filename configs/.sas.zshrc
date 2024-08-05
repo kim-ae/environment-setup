@@ -1,6 +1,6 @@
 copy-context(){
-    cp $LINUX_SETUP_HOME/linux-setup/configs/.sas.p10k.zsh $HOME/.p10k.zsh
-    cp $LINUX_SETUP_HOME/linux-setup/configs/sas.kube.config.yaml $HOME/.kube/config
+    cp $LINUX_SETUP_HOME/configs/.sas.p10k.zsh $HOME/.p10k.zsh
+    cp $LINUX_SETUP_HOME/configs/sas.kube.config.yaml $HOME/.kube/config
 }
 update-context-files(){
     cp $HOME/.p10k.zsh $LINUX_SETUP_HOME/linux-setup/configs/.sas.p10k.zsh
