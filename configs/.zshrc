@@ -143,5 +143,7 @@ case $CUSTOMER in
     source $LINUX_SETUP_HOME/configs/.sas.zshrc
 esac
 
+export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
+
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
