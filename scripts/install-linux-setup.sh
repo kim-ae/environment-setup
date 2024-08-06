@@ -14,3 +14,5 @@ source $HOME/.zshrc
 cd $HOME/$MAIN_FOLDER
 
 git clone git@github.com:kim-ae/pergaminhos.git
+
+dconf load /org/cinnamon/desktop/keybindings/ < $HOME/Documents/linux-setup/configs/conf-settings.conf  

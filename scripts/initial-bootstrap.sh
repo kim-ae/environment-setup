@@ -1,6 +1,11 @@
 #!/bin/bash
 
-echo "Installing git, zsh and oh my zsh
+wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/RobotoMono.zip && \
+mkdir -p ~/.local/share/font && \
+unzip RobotoMono.zip -d ~/.local/share/font/ && \
+rm RobotoMono.zip
+
+echo "Installing git, zsh and oh my zsh"
 sudo apt install git -y
 sudo apt install zsh -y
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"

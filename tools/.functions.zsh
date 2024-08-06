@@ -23,9 +23,10 @@ load_config(){
   cp $HOME/$MAIN_FOLDER/linux-setup/tools/.gitconfig* $HOME/
 }
 
-tool_configs_copy(){
-  cp $HOME/.hyper.js  $HOME/$LINUX_SETUP_HOME/tools/
-  cp $HOME/.gitconfig* $HOME/$LINUX_SETUP_HOME/tools/
+configs_copy(){
+  cp $HOME/.hyper.js  $LINUX_SETUP_HOME/tools/
+  cp $HOME/.gitconfig* $LINUX_SETUP_HOME/tools/
+  dconf dump /org/cinnamon/desktop/keybindings/ > $LINUX_SETUP_HOME/configs/conf-settings.conf 
 }
 
 
