@@ -21,12 +21,13 @@ read_certificate(){
 load_config(){
   cp $HOME/$MAIN_FOLDER/linux-setup/tools/.hyper.js $HOME/
   cp $HOME/$MAIN_FOLDER/linux-setup/tools/.gitconfig* $HOME/
+  dconf load /org/cinnamon/ < $LINUX_SETUP_HOME/configs/cinnamon-settings.conf 
 }
 
 configs_copy(){
   cp $HOME/.hyper.js  $LINUX_SETUP_HOME/tools/
   cp $HOME/.gitconfig* $LINUX_SETUP_HOME/tools/
-  dconf dump /org/cinnamon/desktop/keybindings/ > $LINUX_SETUP_HOME/configs/conf-settings.conf 
+  dconf dump /org/cinnamon/ > $LINUX_SETUP_HOME/configs/cinnamon-settings.conf 
 }
 
 
