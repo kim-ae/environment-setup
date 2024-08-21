@@ -18,16 +18,16 @@ read_certificate(){
     openssl x509 -in $1 -text -noout
 }
 
-load_config(){
+load_config_tools(){
   cp $HOME/$MAIN_FOLDER/linux-setup/tools/.hyper.js $HOME/
   cp $HOME/$MAIN_FOLDER/linux-setup/tools/.gitconfig* $HOME/
-  dconf load /org/cinnamon/ < $LINUX_SETUP_HOME/configs/cinnamon-settings.conf 
 }
 
-configs_copy(){
+
+
+save_config_tools(){
   cp $HOME/.hyper.js  $LINUX_SETUP_HOME/tools/
   cp $HOME/.gitconfig* $LINUX_SETUP_HOME/tools/
-  dconf dump /org/cinnamon/ > $LINUX_SETUP_HOME/configs/cinnamon-settings.conf 
 }
 
 

@@ -51,6 +51,30 @@ EOF
 
 k8s_list_all_resources_for(){
   for i in $(kubectl api-resources --namespaced --verbs=list -o name | tr "\n" " "); do 
-    kubectl get $i --show-kind --ignore-not-found -n $1
+    output="$(kubectl get $i --show-kind --ignore-not-found -n $1)"
+    if [ ! -z "$output" ]; then
+      echo "--- $i ---"
+      echo "$output"
+      echo "---------------------------------------------"
+    fi
   done
+}
+
+k8s_list_selected_resources_for(){
+  for i in $(kubectl api-resources --namespaced --verbs=list -o name | tr "\n" " "); do 
+    output="$(kubectl get $i --show-kind --ignore-not-found -n $1 -l $2)"
+    if [ ! -z "$output" ]; then
+      echo "--- $i ---"
+      echo "$output"
+      echo "---------------------------------------------"
+    fi
+  done
+}
+
+k8s_remove_finalizer(){
+  kubectl patch $1 $2 -n $3 -p '{"metadata":{"finalizers":[]}, "spec":{"patchID":1}}' --type=merge
+}
+
+k8s_force_remove(){
+   k8s_remove_finalizer $1 $2 $3  &&  k delete $1 $2 -n $3
 }

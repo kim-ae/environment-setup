@@ -20,16 +20,18 @@ cat $HOME/.ssh/id_ed25519.pub
 echo "--------------------------------------"
 
 echo "Download and install hyper and tool"
-wget https://github.com/vercel/hyper/releases/download/v3.4.1/hyper_3.4.1_amd64.deb -P $HOME/Downloads
-sudo apt install ./Downloads/hyper_3.4.1_amd64.deb
-wget https://vscode.download.prss.microsoft.com/dbazure/download/stable/f1e16e1e6214d7c44d078b1f0607b2388f29d729/code_1.91.1-1720564633_amd64.deb -P $HOME/Downloads
-sudo apt install ./Downloads/code_1.91.1-1720564633_amd64.deb
+wget https://github.com/vercel/hyper/releases/download/v3.4.1/hyper_3.4.1_amd64.deb -P $HOME/Downloads && \
+    sudo apt install ./Downloads/hyper_3.4.1_amd64.deb && \
+    rm $HOME/Downloads/hyper_3.4.1_amd64.deb
+wget https://vscode.download.prss.microsoft.com/dbazure/download/stable/f1e16e1e6214d7c44d078b1f0607b2388f29d729/code_1.91.1-1720564633_amd64.deb -P $HOME/Downloads && \
+    sudo apt install ./Downloads/code_1.91.1-1720564633_amd64.deb && \
+    rm $HOME/Downloads/code_1.91.1-1720564633_amd64.deb
 
 sudo apt install -y vim
 
-wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-
-sudo apt install -y ./google-chrome-stable_current_amd64.deb && rm google-chrome-stable_current_amd64.deb
+wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb && \
+    sudo apt install -y ./google-chrome-stable_current_amd64.deb && \
+    rm google-chrome-stable_current_amd64.deb
 
 sudo apt-get install -y jq
 

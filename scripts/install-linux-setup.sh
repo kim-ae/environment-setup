@@ -15,4 +15,4 @@ cd $HOME/$MAIN_FOLDER
 
 git clone git@github.com:kim-ae/pergaminhos.git
 
-dconf load /org/cinnamon/desktop/keybindings/ < $HOME/Documents/linux-setup/configs/conf-settings.conf  
+dconf load /org/cinnamon/ < $HOME/Documents/linux-setup/configs/cinnamon-settings.conf  

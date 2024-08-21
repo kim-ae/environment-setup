@@ -5,6 +5,7 @@ curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
 
 az aks install-cli
 
+
 sudo apt-get update && sudo apt-get install -y gnupg software-properties-common
 wget -O- https://apt.releases.hashicorp.com/gpg | \
 gpg --dearmor | \
