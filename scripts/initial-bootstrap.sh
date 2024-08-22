@@ -1,8 +1,8 @@
 #!/bin/bash
 
 wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/RobotoMono.zip && \
-mkdir -p ~/.local/share/font && \
-unzip RobotoMono.zip -d ~/.local/share/font/ && \
+mkdir -p ~/.local/share/fonts && \
+unzip RobotoMono.zip -d ~/.local/share/fonts/ && \
 rm RobotoMono.zip
 
 echo "Installing git, zsh and oh my zsh"
