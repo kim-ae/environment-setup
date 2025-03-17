@@ -1,4 +1,8 @@
 k8s_get_secret(){
+  if [ -z "$1" ] || [ -z "$2" ] || [ -z "$3" ]; then
+    echo "Usage: k8s_get_secret <secret_name> <namespace> <secret_field>"
+    return 1
+  fi
   kubectl get secret $1 -n $2 -o jsonpath="{.data.$3}" | base64 -d
 }
 
@@ -77,4 +81,31 @@ k8s_remove_finalizer(){
 
 k8s_force_remove(){
    k8s_remove_finalizer $1 $2 $3  &&  k delete $1 $2 -n $3
+}
+
+k8s_ctx(){
+  select ctx in $(kubectx)
+  do 
+    kubectx $ctx
+    break
+  done
+}
+
+k8s_ns(){
+  select ns in $(k get ns -o jsonpath="{range .items[*]}{@.metadata.name}{\"\n\"}{end}")
+  do 
+    k config set-context --current --namespace=$ns
+    break
+  done
+}
+
+k8s_suspend_kustomize(){
+  readonly name=$1
+  declare ns=$2
+  if [ -z "${ns}" ]
+  then
+    ns=$name
+  fi
+  
+  flux suspend kustomization $name -n $ns
 }

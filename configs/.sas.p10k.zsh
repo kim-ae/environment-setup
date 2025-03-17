@@ -1327,6 +1327,7 @@
        '*prod*'  PROD    # These values are examples that are unlikely
        '*test*'  TEST    # to match your needs. Customize them as needed.
        '*labs*'  LABS
+       '*minikube*' LABS
        '*'       DEFAULT)
   typeset -g POWERLEVEL9K_KUBECONTEXT_DEFAULT_FOREGROUND=134
   typeset -g POWERLEVEL9K_KUBECONTEXT_DEFAULT_VISUAL_IDENTIFIER_EXPANSION='󱃾'

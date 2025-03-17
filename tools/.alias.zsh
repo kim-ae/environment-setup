@@ -14,3 +14,4 @@ alias save_desktop_config="dconf dump /org/cinnamon/ > $LINUX_SETUP_HOME/configs
 export PATH="/opt/google/google-cloud-sdk/bin:/opt/idea-IU-231.8109.175/bin:$PATH"
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
+export PATH="$PATH:/usr/local/go/bin"
