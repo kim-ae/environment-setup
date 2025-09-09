@@ -13,7 +13,7 @@ echo "--------------------------------------"
 cat $HOME/.ssh/id_ed25519.pub 
 echo "--------------------------------------"
 ```
-3. Execute `export MAIN_FOLDER="Documents" && export LINUX_SETUP_HOME="$HOME/$MAIN_FOLDER/linux-setup" && bootstrap.sh`
+3. Execute `export $(grep -v '^#' version.env | xargs) && export MAIN_FOLDER="Documents" && export LINUX_SETUP_HOME="$HOME/$MAIN_FOLDER/linux-setup" && bootstrap.sh`
 
 # Tooling that will be installed
 

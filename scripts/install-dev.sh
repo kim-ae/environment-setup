@@ -4,7 +4,7 @@ echo "Install sdkman"
 curl -s "https://get.sdkman.io" | bash
 
 echo "Install nvm"
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/$NVM_VERSION/install.sh | bash
 
 echo "Install rust"
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
