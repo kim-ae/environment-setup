@@ -1,3 +1,11 @@
+az_commands(){
+    echo "Available az commands:"
+    echo "  az_get_outbound_ip <public_ip_id> - Get the outbound IP address from a public IP resource ID."
+    echo "  az_acr_login <acr_name> <image_name> - Log in to an Azure Container Registry and pull a specified image using Podman."
+    echo "  az_is_reserved <resourceGroupName> <vmssName> - Check if a VM scale set is using reserved instances."
+    echo "  az_get_subscription_by_name <subscription_name> - Get subscription details by name."
+}
+
 az_get_outbound_ip(){
     az network public-ip show --ids $1 --query ipAddress -o tsv
 }

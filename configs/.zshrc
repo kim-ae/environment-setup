@@ -124,23 +124,7 @@ export JAVA_HOME=/usr
 
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
-source "$HOME/.current-customer" &> /dev/null
-
-if [[ $? = 127 ]] then;
-    export CUSTOMER="sas"
-    echo "export CUSTOMER="sas"" > .current-customer
-fi
-
-case $CUSTOMER in
-  "sas")
-    source $LINUX_SETUP_HOME/configs/.sas.zshrc
-    ;;
-  "kg")
-     source $LINUX_SETUP_HOME/configs/.kg.zshrc
-    ;;
-  *)
-    source $LINUX_SETUP_HOME/configs/.sas.zshrc
-esac
+export PATH=$HOME/.linkerd2/bin:$PATH
 
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 
@@ -149,4 +133,10 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+[[ ! -f $LINUX_SETUP_HOME/configs/.p10k.zsh ]] || source $LINUX_SETUP_HOME/configs/.p10k.zsh
+
+export PATH="$HOME/.linkerd2/bin:$PATH"
+export PATH="$HOME/.local/kitty.app/bin/:$PATH"
+
+commands
+custom_envs

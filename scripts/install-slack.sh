@@ -1,5 +1,7 @@
 #!/bin/bash
 
+echo "Install Slack and Discord"
+
 sudo apt install -y alien
 
 wget https://downloads.slack-edge.com/desktop-releases/linux/x64/4.39.88/slack-4.39.88-0.1.el8.x86_64.rpm

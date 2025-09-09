@@ -1,4 +1,22 @@
-# cli Tooling
+# Pre-requisites
+
+* Linux Mint
+
+# Steps
+1. Install git `sudo apt install git -y`
+2. Import SSH Key to github
+```sh
+echo "Create ssh key"
+ssh-keygen -t ed25519 -C "kim.ae09@gmail.com"
+echo "Copy the pub key and place on git tool"
+echo "--------------------------------------"
+cat $HOME/.ssh/id_ed25519.pub 
+echo "--------------------------------------"
+```
+3. Execute `export MAIN_FOLDER="Documents" && export LINUX_SETUP_HOME="$HOME/$MAIN_FOLDER/linux-setup" && bootstrap.sh`
+
+# Tooling that will be installed
+
 - Git
 - Docker
 - kubectl
@@ -33,13 +51,7 @@
 - brew
 - kubeseal
 - terraform
-- thefuck
-
-# Steps
-1. Install git
-2. Install zsh
-3. Install oh my zsh
-4. install p10k
-5. copy .zshrc
-6. source .zshrc
-7. install tailscale
+- flameshot
+- linkerd
+- cilium
+- 

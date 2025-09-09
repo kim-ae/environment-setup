@@ -1,10 +1,18 @@
 #!/bin/bash
-
-
+echo "Install Azure CLI and AKS CLI"
 curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
-
 az aks install-cli
 
+echo "Install Google Cloud CLI"
+sudo apt-get install -y apt-transport-https ca-certificates gnupg
+echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] \
+https://packages.cloud.google.com/apt cloud-sdk main" | \
+sudo tee /etc/apt/sources.list.d/google-cloud-sdk.list
+curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | \
+sudo apt-key add -
+sudo apt-get update && sudo apt-get install -y google-cloud-sdk
+
+echo "Install Terraform"
 
 sudo apt-get update && sudo apt-get install -y gnupg software-properties-common
 wget -O- https://apt.releases.hashicorp.com/gpg | \

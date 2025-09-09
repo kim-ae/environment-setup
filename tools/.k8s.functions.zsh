@@ -1,3 +1,17 @@
+k8s_commands(){
+  echo "Available k8s commands:"
+  echo "  k8s_get_secret <secret_name> <namespace> <secret_field> - Get and decode a specific field from a Kubernetes secret."
+  echo "  k8s_access_node <node_name> - Access the filesystem of a specific Kubernetes node via a temporary pod."
+  echo "  k8s_list_all_resources_for <namespace> - List all resources in a specified namespace."
+  echo "  k8s_list_selected_resources_for <namespace> <label_selector> - List resources in a namespace filtered by a label selector."
+  echo "  k8s_remove_finalizer <resource_type> <resource_name> <namespace> - Remove finalizers from a specified resource."
+  echo "  k8s_force_remove <resource_type> <resource_name> <namespace> - Force delete a resource by removing its finalizers first."
+  echo "  k8s_ctx - Interactively switch between Kubernetes contexts using kubectx."
+  echo "  k8s_ns - Interactively switch between namespaces in the current context."
+  echo "  k8s_suspend_kustomize <name> [namespace] - Suspend a Flux Kustomization in the specified or default namespace."
+  echo "  k8s_create_sealed_secret <namespace> <secret_name> <key=value,...> <output_file> [controller_namespace] - Create a sealed secret for use with Sealed Secrets."
+}
+
 k8s_get_secret(){
   if [ -z "$1" ] || [ -z "$2" ] || [ -z "$3" ]; then
     echo "Usage: k8s_get_secret <secret_name> <namespace> <secret_field>"
@@ -54,6 +68,11 @@ EOF
 }
 
 k8s_list_all_resources_for(){
+  if [ -z "$1" ]; then
+    echo "Usage: k8s_list_all_resources_for <namespace>"
+    echo "Example: k8s_list_all_resources_for default"
+    return 1
+  fi
   for i in $(kubectl api-resources --namespaced --verbs=list -o name | tr "\n" " "); do 
     output="$(kubectl get $i --show-kind --ignore-not-found -n $1)"
     if [ ! -z "$output" ]; then
@@ -65,6 +84,11 @@ k8s_list_all_resources_for(){
 }
 
 k8s_list_selected_resources_for(){
+  if [ -z "$1" ] || [ -z "$2" ]; then
+    echo "Usage: k8s_list_selected_resources_for <namespace> <label_selector>"
+    echo "Example: k8s_list_selected_resources_for default 'app=my-app'"
+    return 1
+  fi
   for i in $(kubectl api-resources --namespaced --verbs=list -o name | tr "\n" " "); do 
     output="$(kubectl get $i --show-kind --ignore-not-found -n $1 -l $2)"
     if [ ! -z "$output" ]; then
@@ -76,11 +100,16 @@ k8s_list_selected_resources_for(){
 }
 
 k8s_remove_finalizer(){
+  if [ -z "$1" ] || [ -z "$2" ] || [ -z "$3" ]; then
+    echo "Usage: k8s_remove_finalizer <resource_type> <resource_name> <namespace>"
+    echo "Example: k8s_remove_finalizer pod my-pod default"
+    return 1
+  fi
   kubectl patch $1 $2 -n $3 -p '{"metadata":{"finalizers":[]}, "spec":{"patchID":1}}' --type=merge
 }
 
 k8s_force_remove(){
-   k8s_remove_finalizer $1 $2 $3  &&  k delete $1 $2 -n $3
+   k8s_remove_finalizer $1 $2 $3  &&  kubectl delete $1 $2 -n $3
 }
 
 k8s_ctx(){
@@ -108,4 +137,33 @@ k8s_suspend_kustomize(){
   fi
   
   flux suspend kustomization $name -n $ns
+}
+
+
+k8s_create_sealed_secret(){
+  readonly namespace=$1
+  readonly secret_name=$2
+  readonly values=$3
+  readonly output_file=$4
+  declare controller_namespace=${5:-kube-system}
+
+  if [ -z "${namespace}" ] || [ -z "${secret_name}" ] || [ -z "${values}" ] || [ -z "${output_file}" ]; then
+    echo "Usage: create_sealed_secret <namespace> <secret-name> <key=value,...> <output-file> [controller-namespace]"
+    echo "Example: create_sealed_secret myapp default db-creds 'password=123,key=456' sealed-secret.yaml"
+    return 1
+  fi
+
+  # Convert comma-separated key=value pairs to --from-literal arguments
+  literal_args=""
+  pairs=(${(s:,:)values})
+  for pair in "${pairs[@]}"; do
+    literal_args+="--from-literal=$pair "
+  done
+
+  # Wrap literal_args in quotes to preserve all arguments
+  eval "kubectl create secret generic $secret_name \
+    --namespace $namespace \
+    ${literal_args} \
+    --dry-run=client -o yaml | \
+    kubeseal --controller-namespace=$controller_namespace --format=yaml > $output_file"
 }
