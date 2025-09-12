@@ -16,13 +16,6 @@ custom_envs(){
   echo -e "  \033[1;32mLINUX_SETUP_HOME\033[0m=\033[0;33m$LINUX_SETUP_HOME\033[0m"
 }
 
-change_customer(){
-  echo "export CUSTOMER=$1" > "$HOME/.current-customer"
-  source ~/.zshrc
-  copy-context
-  source ~/.zshrc
-}
-
 print_colors(){
     for c in {0..255}; do
       printf "\033[48;5;%sm%3d\033[0m " "$c" "$c"

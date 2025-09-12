@@ -29,6 +29,10 @@ wget https://vscode.download.prss.microsoft.com/dbazure/download/stable/f1e16e1e
     sudo apt install ./Downloads/code_${VSCODE_VERSION}_amd64.deb && \
     rm $HOME/Downloads/code_${VSCODE_VERSION}_amd64.deb
 
+echo "Install Cursor"
+wget -O cursor.deb https://downloads.cursor.com/production/2f2737de9aa376933d975ae30290447c910fdf46/linux/x64/deb/amd64/deb/cursor_1.5.11_amd64.deb && \
+    sudo apt install ./cursor.deb && rm cursor.deb
+
 echo "Install vim"
 sudo apt install -y vim
 
