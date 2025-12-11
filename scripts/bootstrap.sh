@@ -2,6 +2,12 @@
 
 # Define version variables
 
+echo "Update package lists and upgrade existing packages"
+sudo mv /etc/apt/preferences.d/nosnap.pref /etc/apt/preferences.d/nosnap.backup
+sudo apt update
+
+echo "Install Snap"
+sudo apt install -y snapd
 
 echo "Configure fonts"
 
@@ -19,19 +25,8 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/too
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
 sudo chsh -s $(which zsh)
 
-echo "Download and install hyper"
-wget https://github.com/vercel/hyper/releases/download/v$HYPER_VERSION/hyper_${HYPER_VERSION}_amd64.deb -P $HOME/Downloads && \
-    sudo apt install ./Downloads/hyper_${HYPER_VERSION}_amd64.deb && \
-    rm $HOME/Downloads/hyper_${HYPER_VERSION}_amd64.deb
-
 echo "Install VS Code"
-wget https://vscode.download.prss.microsoft.com/dbazure/download/stable/f1e16e1e6214d7c44d078b1f0607b2388f29d729/code_${VSCODE_VERSION}_amd64.deb -P $HOME/Downloads && \
-    sudo apt install ./Downloads/code_${VSCODE_VERSION}_amd64.deb && \
-    rm $HOME/Downloads/code_${VSCODE_VERSION}_amd64.deb
-
-echo "Install Cursor"
-wget -O cursor.deb https://downloads.cursor.com/production/2f2737de9aa376933d975ae30290447c910fdf46/linux/x64/deb/amd64/deb/cursor_1.5.11_amd64.deb && \
-    sudo apt install ./cursor.deb && rm cursor.deb
+snap install code
 
 echo "Install vim"
 sudo apt install -y vim
@@ -53,5 +48,14 @@ echo "Install homebrew"
 
 echo "Install Obsidian"
 flatpak install flathub md.obsidian.Obsidian
+
+echo "Install CopyQ"
+sudo apt install -y copyq
+
+echo "Install Flameshot"
+sudo apt-get install -y flameshot
+
+echo "Install kitty"
+curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
 
 echo "Restart the session"

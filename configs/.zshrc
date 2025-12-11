@@ -11,6 +11,8 @@ fi
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 export MAIN_FOLDER="Documents"
+export KNOWLEDGE_BASE="kim7s-knowledge-base"
+export KNOWLEDGE_BASE_HOME="$HOME/$MAIN_FOLDER/$KNOWLEDGE_BASE"
 export LINUX_SETUP_HOME="$HOME/$MAIN_FOLDER/linux-setup"
 
 # Set name of the theme to load --- if set to "random", it will

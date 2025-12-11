@@ -10,6 +10,7 @@ k8s_commands(){
   echo "  k8s_ns - Interactively switch between namespaces in the current context."
   echo "  k8s_suspend_kustomize <name> [namespace] - Suspend a Flux Kustomization in the specified or default namespace."
   echo "  k8s_create_sealed_secret <namespace> <secret_name> <key=value,...> <output_file> [controller_namespace] - Create a sealed secret for use with Sealed Secrets."
+  echo "  k8s_debug <namespace> <pod> <container> - Debug a specific container in a pod by attaching a temporary BusyBox container."
 }
 
 k8s_get_secret(){
@@ -166,4 +167,17 @@ k8s_create_sealed_secret(){
     ${literal_args} \
     --dry-run=client -o yaml | \
     kubeseal --controller-namespace=$controller_namespace --format=yaml > $output_file"
+}
+
+k8s_debug(){
+  readonly namespace=$1
+  readonly pod=$2
+  readonly container=$3
+  readonly image=${4:-busybox}
+  if [ -z "$namespace" ] || [ -z "$pod" ] || [ -z "$container" ]; then
+    echo "Usage: k8s_debug <namespace> <pod> <container> [image]"
+    echo "Example: k8s_debug default my-pod my-container busybox"
+    return 1
+  fi
+  kubectl debug -n $namespace -it $pod --image=$image --target=$container
 }

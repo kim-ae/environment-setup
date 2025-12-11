@@ -2,10 +2,8 @@
 	s = status 
 [core]
 	editor = vim
-[includeIf "gitdir:~/sas/"]
-  path = .gitconfig-sas
-[includeIf "gitdir:~/kg/"]
-  path = .gitconfig-kg
+[includeIf "gitdir:~/company/"]
+  path = .gitconfig-company
 [init]
 	defaultBranch = main
 [user]

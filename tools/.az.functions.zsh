@@ -11,6 +11,13 @@ az_get_outbound_ip(){
 }
 
 az_acr_login(){
+    if [ "$1" = "-help" ] || [ -z "$1" ] || [ -z "$2" ]; then
+        echo "Usage: az_acr_login <acr_name> <image_name>"
+        echo "  <acr_name>   - The name of the Azure Container Registry."
+        echo "  <image_name> - The name of the image to pull."
+        return 1
+    fi
+
     TOKEN=$(az acr login -n $1 --expose-token -o tsv --query accessToken)
     podman pull $1.azurecr.io/$2 --creds 00000000-0000-0000-0000-000000000000:$TOKEN
 }
