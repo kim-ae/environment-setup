@@ -1,26 +1,25 @@
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+if [[ $ZSH_PROMPT_ENGINE == "p10k" ]]; then
+  if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+    source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+  fi
 fi
-
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
-export MAIN_FOLDER="Documents"
 export KNOWLEDGE_BASE="kim7s-knowledge-base"
 export KNOWLEDGE_BASE_HOME="$HOME/$MAIN_FOLDER/$KNOWLEDGE_BASE"
-export LINUX_SETUP_HOME="$HOME/$MAIN_FOLDER/linux-setup"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 #ZSH_THEME="escobar-darkblood"
-ZSH_THEME="powerlevel10k/powerlevel10k"
+#ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -135,10 +134,18 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f $LINUX_SETUP_HOME/configs/.p10k.zsh ]] || source $LINUX_SETUP_HOME/configs/.p10k.zsh
+if [[ $ZSH_PROMPT_ENGINE == "p10k" ]]; then
+  [[ ! -f $LINUX_SETUP_HOME/configs/.p10k.zsh ]] || source $LINUX_SETUP_HOME/configs/.p10k.zsh
+fi
+
+custom_envs
+commands
 
 export PATH="$HOME/.linkerd2/bin:$PATH"
 export PATH="$HOME/.local/kitty.app/bin/:$PATH"
+export PATH="$HOME/.local/bin/:$PATH"
 
-commands
-custom_envs
+if [[ $ZSH_PROMPT_ENGINE == "ohmyposh" ]]; then
+  eval "$(oh-my-posh init zsh --config $LINUX_SETUP_HOME/configs/kim7s.darkblood.toml)"
+  source $LINUX_SETUP_HOME/configs/set_poshcontext.sh
+fi

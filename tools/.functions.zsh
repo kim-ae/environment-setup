@@ -13,8 +13,9 @@ commands(){
 
 custom_envs(){
   echo -e "\033[1;34mMain env variables:\033[0m"
-  echo -e "  \033[1;32mMAIN_FOLDER\033[0m=\033[0;33m$MAIN_FOLDER\033[0m"
-  echo -e "  \033[1;32mLINUX_SETUP_HOME\033[0m=\033[0;33m$LINUX_SETUP_HOME\033[0m"
+  while IFS='=' read -r key value; do
+    echo -e "  \033[1;32m$key\033[0m=\033[0;33m$value\033[0m"
+  done < "$HOME/.custom.envs"
 }
 
 print_colors(){
@@ -71,7 +72,6 @@ documentation(){
       ;;
   esac
 }
-
 
 source $LINUX_SETUP_HOME/tools/.az.functions.zsh
 source $LINUX_SETUP_HOME/tools/.k8s.functions.zsh

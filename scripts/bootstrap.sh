@@ -19,11 +19,16 @@ rm RobotoMono.zip
 echo "Configure cinnamon settings"
 dconf load /org/cinnamon/ < $LINUX_SETUP_HOME/configs/cinnamon-settings.conf  
 
-echo "Installing zsh, oh my zsh and p10k"
+echo "Installing zsh and oh my zsh"
 sudo apt install zsh -y
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
 sudo chsh -s $(which zsh)
+
+echo "Install p10k"
+git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+
+echo "Install oh-my-posh"
+curl -s https://ohmyposh.dev/install.sh | bash -s
 
 echo "Install VS Code"
 snap install code
@@ -57,5 +62,10 @@ sudo apt-get install -y flameshot
 
 echo "Install kitty"
 curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
+
+cp $LINUX_SETUP_HOME/configs/.zshrc $HOME/.zshrc
+cp $LINUX_SETUP_HOME/configs/.custom.envs $HOME/.custom.envs
+
+echo ". $HOME/.custom.envs" >> "$HOME/.zshenv"
 
 echo "Restart the session"

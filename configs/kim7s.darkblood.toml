@@ -1,0 +1,213 @@
+version = 4
+final_space = true
+disable_notice = true
+auto_upgrade = false
+tooltips_action = 'prepend'
+
+[var]
+LeftUpperConnector = "╭─"
+RightUpperConnector = "─╮"
+LeftLowerConnector = "╰─"
+RightLowerConnector = "─╯"
+Divider = "│"
+LeftEndOfLine = "▓▒░"
+RightEndOfLine = "░▒▓"
+GcpSymbol = ""
+AzureSymbol = ""
+CarefulSymbol = "󰯈"
+
+[upgrade]
+  source = 'cdn'
+  interval = '168h'
+  auto = false
+  notice = false
+
+[[blocks]]
+  type = 'prompt'
+  alignment = 'left'
+  newline = true
+
+  [[blocks.segments]]
+    foreground = 'p:bgray'
+    template = "{{.Var.LeftUpperConnector}}"
+    type = 'text'
+    style = 'plain'
+  
+  [[blocks.segments]]
+    template = ' <b>{{ .Path }}</b>'
+    foreground = 'p:normalblue'
+    background = 'p:bgray'
+    type = 'path'
+    style = 'plain'
+    [blocks.segments.options]
+      style = 'full'
+      # [blocks.segments.options.mapped_locations]
+      #   "/home/escobar/Documents" = ' Docs'
+
+  [[blocks.segments]]
+    interactive = true
+    background = 'p:bgray'
+    foreground = 'p:fgray'
+    type = 'git'
+    style = 'plain'
+    template = ' {{.Var.Divider}} {{ if contains "WIP" .Commit.Subject }}has <p:warnred>WIP</>{{ end }} on <p:okgreen> {{ .HEAD }}</><p:warnred>{{ if or (.Working.Changed) (.Staging.Changed) }}*{{ end }} {{ if gt .Behind 0 }}󰁅{{ end }}{{ if gt .Ahead 0 }}{{ end }}</>'
+
+    [blocks.segments.options]
+      branch_icon = ''
+      commit_icon = '@'
+      fetch_status = true
+
+  [[blocks.segments]]
+    foreground = 'p:bgray'
+    template = "{{.Var.LeftEndOfLine}}"
+    type = 'text'
+    style = 'plain'
+
+[[blocks]]
+  type = 'prompt'
+  alignment = 'right'
+  tooltips_action = "extend"
+  filler = "<p:bgray>─</>"
+  [[blocks.segments]]
+    foreground = 'p:bgray'
+    template = "{{.Var.RightEndOfLine}}"
+    type = 'text'
+    style = 'plain'
+  [[blocks.segments]]
+    background = 'p:bgray'
+    foreground = 'p:fgray'
+    template = '{{if contains .Env.TAIL "0" }}<p:secondaryblue>{{ .Env.VPN_IP}}</> vpn │ {{end}}'
+    type = 'text'
+    style = 'plain'
+  [[blocks.segments]]
+    background = 'p:bgray'
+    template = '{{if contains .Env.TAIL "0" }}<p:okgreen>TAILSCALE</>{{ else }}<p:warnred>TAILSCALE</>{{end}} '
+    type = 'text'
+    style = 'plain'
+  [[blocks.segments]]
+    type = "executiontime"
+    alias = "ExecTime"
+    style = "plain"
+    foreground = "p:fgray"
+    background = "p:bgray"
+    template = "took {{ .FormattedMs }} "
+
+    [options]
+      threshold = 50
+      style = "austin"
+      always_enabled = true
+  [[blocks.segments]]
+    type = "project"
+    style = "plain"
+    foreground = "p:normalblue"
+    background = "p:bgray"
+    template = " {{ if .Error }}{{ .Error }}{{ else }}{{ if .Version }} {{.Version}}{{ end }} {{ if .Name }}{{ .Name }}{{ end }}{{ end }} "
+  [[blocks.segments]]
+    type = "node"
+    style = "plain"
+    foreground = "p:languagegreen"
+    background = "p:bgray"
+    template = "  {{ .Full }} "
+  [[blocks.segments]]
+    type = "java"
+    style = "plain"
+    foreground = "p:languagegreen"
+    background = "p:bgray"
+    template = "  {{ .Full }} "
+  [[blocks.segments]]
+    type = "go"
+    style = "plain"
+    foreground = "p:languagegreen"
+    background = "p:bgray"
+    template = "  {{ .Full }} "
+  [[blocks.segments]]
+    foreground = 'p:bgray'
+    template = "{{.Var.RightUpperConnector}}"
+    type = 'text'
+    style = 'plain'
+
+[[blocks]]
+  type = 'prompt'
+  alignment = 'left'
+  newline = true
+  
+  [[blocks.segments]]
+    template = "{{.Var.LeftLowerConnector}}"
+    foreground = 'p:bgray'
+    type = 'text'
+    style = 'plain'
+  [[blocks.segments]]
+    template = ' <p:okgreen>{{ if eq 0 .Code }}✔{{end}}</><p:warnred>{{ if gt .Code 0 }}✘ {{.Code}}{{end}}</>'
+    background = 'p:bgray'
+    alias = "Status"
+    type = 'status'
+    style = 'plain'
+    [blocks.segments.options]
+      always_enabled = true
+  [[blocks.segments]]
+    template = ' {{.Var.Divider}} at <p:secondaryblue>{{.CurrentDate | date .Format }}</> '
+    alias = "Time"
+    background = 'p:bgray'
+    foreground = 'p:normalblue'
+    type = 'time'
+    style = 'plain'
+  [[blocks.segments]]
+    foreground = 'p:normalblue'
+    template = "{{.Var.LeftEndOfLine}}"
+    type = 'text'
+    style = 'plain'
+
+[[blocks]]
+  type = 'rprompt'
+  alignment = 'right'
+  [[blocks.segments]]
+    foreground = 'p:bgray'
+    template = "{{.Var.RightLowerConnector}}"
+    type = 'text'
+    style = 'plain'
+
+    
+[[tooltips]]
+  tips = ["k", "kubectl", "az", "gcloud", "terraform"]
+  type = "text"
+  style = "plain"
+  foreground = 'p:bgray'
+  template = "{{.Var.RightEndOfLine}}"
+[[tooltips]]
+  tips = ["k", "kubectl"]
+  background = 'p:bgray'
+  foreground = 'p:fgray'
+  type = 'kubectl'
+  template = ' {{ if contains "prod" .Context }}<p:warnred> {{.Var.CarefulSymbol}}{{ else }} <p:normalblue> {{ end }}{{ .Context }} @ {{ if .Namespace}}{{.Namespace}}{{else}}default{{end}} </>'
+  style = 'plain'
+[[tooltips]]
+  tips = ["az"]
+  type = "az"
+  style = "plain"
+  foreground = "p:normalblue"
+  background = "p:bgray"
+  template = " {{ .Var.AzureSymbol}} {{ .Name }} :: {{ .User.Name }} "
+[[tooltips]]
+  type = "gcp"
+  style = "plain"
+  tips = ["gcloud"]
+  foreground = "p:normalblue"
+  background = "p:bgray"
+  template = " {{.Var.GcpSymbol}} {{.Project}} :: {{.Account}} "
+
+[transient_prompt]
+  background = "transparent"
+  foreground = "p:bgray"
+  template = " {{ .Segments.Status.Text }}{{ .Segments.Time.Text }}{{.Var.LeftEndOfLine}}"
+[secondary_prompt]
+  foreground = "p:bgray"
+  template =  "{{.Var.LeftEndOfLine}} "
+
+[palette]
+  bgray = '#303030'
+  fgray = "#949494"
+  warnred = '#d70000'
+  normalblue = '#0087af'
+  languagegreen = "#6CA35E"
+  okgreen = '#5faf00'
+  secondaryblue = '#5f8787'
