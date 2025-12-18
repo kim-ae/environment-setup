@@ -3,6 +3,8 @@ final_space = true
 disable_notice = true
 auto_upgrade = false
 tooltips_action = 'prepend'
+shell_integration = true
+async = true
 
 [var]
 LeftUpperConnector = "╭─"
@@ -15,6 +17,7 @@ RightEndOfLine = "░▒▓"
 GcpSymbol = ""
 AzureSymbol = ""
 CarefulSymbol = "󰯈"
+OS = ""
 
 [upgrade]
   source = 'cdn'
@@ -32,17 +35,20 @@ CarefulSymbol = "󰯈"
     template = "{{.Var.LeftUpperConnector}}"
     type = 'text'
     style = 'plain'
-  
+
   [[blocks.segments]]
-    template = ' <b>{{ .Path }}</b>'
+    template = '{{if not .Writable}} <p:warnred></>{{end}} <b>{{ path .Path .Location }}</b> {{if contains "." .Path}}{{end}}'
+    alias = "Path"
     foreground = 'p:normalblue'
     background = 'p:bgray'
     type = 'path'
     style = 'plain'
     [blocks.segments.options]
       style = 'full'
-      # [blocks.segments.options.mapped_locations]
-      #   "/home/escobar/Documents" = ' Docs'
+      [blocks.segments.options.mapped_locations]
+        "/home/escobar/Documents/linux-setup" = '<p:fgray></> env-setup'
+        "/home/escobar/sas" = "<p:sasblue>󰀝 sas</>"
+        "/home/escobar/Documents/kim7s-knowledge-base" = ' knowledge'
 
   [[blocks.segments]]
     interactive = true
@@ -71,6 +77,18 @@ CarefulSymbol = "󰯈"
   [[blocks.segments]]
     foreground = 'p:bgray'
     template = "{{.Var.RightEndOfLine}}"
+    type = 'text'
+    style = 'plain'
+  [[blocks.segments]]
+    background = 'p:bgray'
+    foreground = 'p:fgray' 
+    template = '<p:normalblue> {{ .UserName }}</> {{.Var.Divider}}'
+    type = 'text'
+    style = 'plain'
+  [[blocks.segments]]
+    background = 'p:bgray'
+    foreground = 'p:fgray'
+    template = ' <p:normalblue>󱌣 {{ .Jobs }}</> {{.Var.Divider}} '
     type = 'text'
     style = 'plain'
   [[blocks.segments]]
@@ -198,9 +216,9 @@ CarefulSymbol = "󰯈"
 [transient_prompt]
   background = "transparent"
   foreground = "p:bgray"
-  template = " {{ .Segments.Status.Text }}{{ .Segments.Time.Text }}{{.Var.LeftEndOfLine}}"
+  template = " {{ .Segments.Path.Text }}{{ .Segments.Time.Text }}{{.Var.LeftEndOfLine}}"
 [secondary_prompt]
-  foreground = "p:bgray"
+  foreground = "p:normalblue"
   template =  "{{.Var.LeftEndOfLine}} "
 
 [palette]
@@ -211,3 +229,5 @@ CarefulSymbol = "󰯈"
   languagegreen = "#6CA35E"
   okgreen = '#5faf00'
   secondaryblue = '#5f8787'
+  mintgreen = '#86BE43'
+  sasblue = '#2B3087'

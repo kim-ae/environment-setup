@@ -1,3 +1,4 @@
 ZSH_PROMPT_ENGINE="ohmyposh"
 MAIN_FOLDER="Documents"
 LINUX_SETUP_HOME="$HOME/$MAIN_FOLDER/linux-setup"
+KNOWLEDGE="$HOME/$MAIN_FOLDER/kim7s-knowledge-base"
