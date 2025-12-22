@@ -4,7 +4,6 @@ disable_notice = true
 auto_upgrade = false
 tooltips_action = 'prepend'
 shell_integration = true
-async = true
 
 [var]
 LeftUpperConnector = "╭─"
@@ -37,7 +36,7 @@ OS = ""
     style = 'plain'
 
   [[blocks.segments]]
-    template = '{{if not .Writable}} <p:warnred></>{{end}} <b>{{ path .Path .Location }}</b> {{if contains "." .Path}}{{end}}'
+    template = '{{if not .Writable}} <p:warnred></>{{end}} <b>{{ .Path }}</b> {{if contains "/." .Path}}{{end}}'
     alias = "Path"
     foreground = 'p:normalblue'
     background = 'p:bgray'
@@ -94,12 +93,12 @@ OS = ""
   [[blocks.segments]]
     background = 'p:bgray'
     foreground = 'p:fgray'
-    template = '{{if contains .Env.TAIL "0" }}<p:secondaryblue>{{ .Env.VPN_IP}}</> vpn │ {{end}}'
+    template = '{{if eq .Env.TAIL "true" }}<p:secondaryblue>{{ .Env.VPN_IP}}</> vpn │ {{end}}'
     type = 'text'
     style = 'plain'
   [[blocks.segments]]
     background = 'p:bgray'
-    template = '{{if contains .Env.TAIL "0" }}<p:okgreen>TAILSCALE</>{{ else }}<p:warnred>TAILSCALE</>{{end}} '
+    template = '{{if eq .Env.TAIL "true" }}<p:okgreen>TAILSCALE</>{{ else }}<p:warnred>TAILSCALE</>{{end}} '
     type = 'text'
     style = 'plain'
   [[blocks.segments]]

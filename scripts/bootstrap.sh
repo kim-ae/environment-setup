@@ -12,9 +12,11 @@ sudo apt install -y snapd
 echo "Configure fonts"
 
 wget https://github.com/ryanoasis/nerd-fonts/releases/download/$NERD_FONTS_VERSION/RobotoMono.zip && \
+wget https://github.com/ryanoasis/nerd-fonts/releases/download/$NERD_FONTS_VERSION/0xProto.zip
 mkdir -p ~/.local/share/fonts && \
 unzip RobotoMono.zip -d ~/.local/share/fonts/ && \
-rm RobotoMono.zip
+unzip 0xProto.zip -d ~/.local/share/fonts/ && \
+rm RobotoMono.zip 0xProto.zip
 
 echo "Configure cinnamon settings"
 dconf load /org/cinnamon/ < $LINUX_SETUP_HOME/configs/cinnamon-settings.conf  
