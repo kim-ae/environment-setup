@@ -1,0 +1,6 @@
+layout fat
+
+cd ~/$KIM7S_REPOSITORY
+
+launch --title "Kim7s" k9s --context=awesome-kim7s
+launch --title "terminal" --type window --cwd ~/Documents/sandbox/testing-kim7s-stuff

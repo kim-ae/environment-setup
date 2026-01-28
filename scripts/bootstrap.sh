@@ -64,6 +64,7 @@ sudo apt-get install -y flameshot
 
 echo "Install kitty"
 curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
+cp $LINUX_SETUP_HOME/configs/local.kitty-session $HOME/.config/kitty/
 
 cp $LINUX_SETUP_HOME/configs/.zshrc $HOME/.zshrc
 cp $LINUX_SETUP_HOME/configs/.custom.envs $HOME/.custom.envs

@@ -18,6 +18,11 @@ custom_envs(){
   done < "$HOME/.custom.envs"
 }
 
+load_envs(){
+  cp $LINUX_SETUP_HOME/configs/.custom.envs $HOME/.custom.envs
+  echo ". $HOME/.custom.envs" >> "$HOME/.zshenv"
+}
+
 print_colors(){
     for c in {0..255}; do
       printf "\033[48;5;%sm%3d\033[0m " "$c" "$c"

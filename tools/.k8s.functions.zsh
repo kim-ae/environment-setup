@@ -181,3 +181,31 @@ k8s_debug(){
   fi
   kubectl debug -n $namespace -it $pod --image=$image --target=$container
 }
+
+k8s_access(){
+
+  echo "Select an image to use:"
+  select option in "alpine/openssl" "busybox" "nicolaka/netshoot" "curlimages/curl" "alpine:latest"
+  do
+    if [ -n "$option" ]; then
+      image=$option
+      break
+    fi
+  done
+
+  echo "Current context: $(kubectl config current-context)"
+  read -q "REPLY?Do you want to continue with this operation? (y/n) "
+  echo
+  if [[ ! $REPLY =~ ^[Yy]$ ]]; then
+    echo "Operation cancelled."
+    return 0
+  fi
+  kubectl run removeme --image=$image --restart=Never --overrides='{"metadata":{"annotations":{"linkerd.io/inject":"enabled"}}}' --command -- /bin/sh -c "while true; do sleep 30; done"
+  
+  echo "Pod 'removeme' created. Connecting..."
+  kubectl wait --for=condition=ready pod/removeme --timeout=60s
+  kubectl exec -it removeme -c removeme -- /bin/sh
+  
+  echo "Cleaning up..."
+  kubectl delete pod removeme
+}
