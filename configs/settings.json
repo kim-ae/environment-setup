@@ -1,0 +1,51 @@
+{
+    "redhat.telemetry.enabled": false,
+    "files.autoSave": "afterDelay",
+    "workbench.colorTheme": "Horizon",
+    "workbench.preferredDarkColorTheme": "Dark Plus Darcula (default)",
+    "workbench.iconTheme": "sweet-vscode-icons",
+    "vs-kubernetes": {
+        "vs-kubernetes.namespace": "",
+        "vs-kubernetes.kubectl-path": "",
+        "vs-kubernetes.helm-path": "",
+        "vs-kubernetes.minikube-path": "",
+        "vs-kubernetes.kubectlVersioning": "user-provided",
+        "vs-kubernetes.outputFormat": "yaml",
+        "vs-kubernetes.kubeconfig": "",
+        "vs-kubernetes.knownKubeconfigs": [],
+        "vs-kubernetes.autoCleanupOnDebugTerminate": false,
+        "vs-kubernetes.nodejs-autodetect-remote-root": true,
+        "vs-kubernetes.nodejs-remote-root": "",
+        "vs-kubernetes.nodejs-debug-port": 9229,
+        "vs-kubernetes.dotnet-vsdbg-path": "~/vsdbg/vsdbg",
+        "vs-kubernetes.local-tunnel-debug-provider": "",
+        "checkForMinikubeUpgrade": true,
+        "imageBuildTool": "Docker",
+        "vscode-kubernetes.minikube-path-linux": "/home/escobar/.local/state/vs-kubernetes/tools/minikube/linux-amd64/minikube"
+    },
+    "editor.fontFamily": "'0xProto Nerd Font'",
+    "editor.fontSize": 13,
+    "terminal.external.linuxExec": "hyper",
+    "yaml.validate": false,
+    "debug.allowBreakpointsEverywhere": true,
+    "workbench.startupEditor": "none",
+    "docker.extension.enableComposeLanguageServer": false,
+    "github.copilot.nextEditSuggestions.enabled": true,
+    "[dockercompose]": {
+        "editor.insertSpaces": true,
+        "editor.tabSize": 2,
+        "editor.autoIndent": "advanced",
+        "editor.quickSuggestions": {
+            "other": true,
+            "comments": false,
+            "strings": true
+        },
+        "editor.defaultFormatter": "redhat.vscode-yaml"
+    },
+    "[github-actions-workflow]": {
+        "editor.defaultFormatter": "redhat.vscode-yaml"
+    },
+    "editor.formatOnSave": true,
+    "files.trimTrailingWhitespace": true,
+    "files.insertFinalNewline": true,
+}

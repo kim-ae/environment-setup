@@ -78,6 +78,11 @@ documentation(){
   esac
 }
 
+reload_dhcp(){
+  dhclient -r wlp0s20f3
+  dhclient wlp0s20f3
+}
+
 source $LINUX_SETUP_HOME/tools/.az.functions.zsh
 source $LINUX_SETUP_HOME/tools/.k8s.functions.zsh
 source $LINUX_SETUP_HOME/tools/.git.functions.zsh

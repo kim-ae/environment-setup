@@ -17,6 +17,7 @@ GcpSymbol = ""
 AzureSymbol = ""
 CarefulSymbol = "󰯈"
 OS = ""
+k8sSymbol = ""
 
 [upgrade]
   source = 'cdn'
@@ -80,25 +81,32 @@ OS = ""
     style = 'plain'
   [[blocks.segments]]
     background = 'p:bgray'
-    foreground = 'p:fgray' 
-    template = '<p:normalblue> {{ .UserName }}</> {{.Var.Divider}}'
+    foreground = 'p:fgray'
+    type = 'kubectl'
+    template = '{{if contains "prod" .Context }}<p:warnred> {{.Var.CarefulSymbol}}{{ else }} <p:normalblue> {{ end }}{{ .Var.k8sSymbol }} {{ .Context }} @ {{ if .Namespace}}{{.Namespace}}{{else}}default{{end}} </>{{.Var.Divider}}'
+    style = 'plain'
+  [[blocks.segments]]
+    type = "az"
+    style = "plain"
+    foreground = "p:normalblue"
+    background = "p:bgray"
+    template = " {{ .Var.AzureSymbol}} {{ .Name }} "
+  # [[blocks.segments]]
+  #   background = 'p:bgray'
+  #   foreground = 'p:fgray'
+  #   template = '<p:normalblue> {{ .UserName }}</> {{.Var.Divider}}'
+  #   type = 'text'
+  #   style = 'plain'
+  [[blocks.segments]]
+    background = 'p:bgray'
+    foreground = 'p:fgray'
+    template = '{{.Var.Divider}} <p:normalblue>󱌣 {{ .Jobs }}</> '
     type = 'text'
     style = 'plain'
   [[blocks.segments]]
     background = 'p:bgray'
     foreground = 'p:fgray'
-    template = ' <p:normalblue>󱌣 {{ .Jobs }}</> {{.Var.Divider}} '
-    type = 'text'
-    style = 'plain'
-  [[blocks.segments]]
-    background = 'p:bgray'
-    foreground = 'p:fgray'
-    template = '{{if eq .Env.TAIL "true" }}<p:secondaryblue>{{ .Env.VPN_IP}}</> vpn │ {{end}}'
-    type = 'text'
-    style = 'plain'
-  [[blocks.segments]]
-    background = 'p:bgray'
-    template = '{{if eq .Env.TAIL "true" }}<p:okgreen>TAILSCALE</>{{ else }}<p:warnred>TAILSCALE</>{{end}} '
+    template = '{{if eq .Env.TAIL "true" }}{{.Var.Divider}} <p:secondaryblue>{{ .Env.VPN_IP}}</> vpn {{end}}'
     type = 'text'
     style = 'plain'
   [[blocks.segments]]
@@ -107,10 +115,10 @@ OS = ""
     style = "plain"
     foreground = "p:fgray"
     background = "p:bgray"
-    template = "took {{ .FormattedMs }} "
+    template = "{{.Var.Divider}} took {{ .FormattedMs }} "
 
     [options]
-      threshold = 50
+      threshold = 0
       style = "austin"
       always_enabled = true
   [[blocks.segments]]
@@ -147,7 +155,7 @@ OS = ""
   type = 'prompt'
   alignment = 'left'
   newline = true
-  
+
   [[blocks.segments]]
     template = "{{.Var.LeftLowerConnector}}"
     foreground = 'p:bgray'
@@ -178,32 +186,21 @@ OS = ""
   type = 'rprompt'
   alignment = 'right'
   [[blocks.segments]]
+    type = "text"
+    style = "plain"
+    foreground = 'p:bgray'
+    template = "{{.Var.RightEndOfLine}}"
+  [[blocks.segments]]
+    background = 'p:bgray'
+    template = '{{if eq .Env.TAIL "true" }}<p:okgreen>TAILSCALE</>{{ else }}<p:warnred>TAILSCALE</>{{end}} '
+    type = 'text'
+    style = 'plain'
+  [[blocks.segments]]
     foreground = 'p:bgray'
     template = "{{.Var.RightLowerConnector}}"
     type = 'text'
     style = 'plain'
 
-    
-[[tooltips]]
-  tips = ["k", "kubectl", "az", "gcloud", "terraform"]
-  type = "text"
-  style = "plain"
-  foreground = 'p:bgray'
-  template = "{{.Var.RightEndOfLine}}"
-[[tooltips]]
-  tips = ["k", "kubectl"]
-  background = 'p:bgray'
-  foreground = 'p:fgray'
-  type = 'kubectl'
-  template = ' {{ if contains "prod" .Context }}<p:warnred> {{.Var.CarefulSymbol}}{{ else }} <p:normalblue> {{ end }}{{ .Context }} @ {{ if .Namespace}}{{.Namespace}}{{else}}default{{end}} </>'
-  style = 'plain'
-[[tooltips]]
-  tips = ["az"]
-  type = "az"
-  style = "plain"
-  foreground = "p:normalblue"
-  background = "p:bgray"
-  template = " {{ .Var.AzureSymbol}} {{ .Name }} :: {{ .User.Name }} "
 [[tooltips]]
   type = "gcp"
   style = "plain"
