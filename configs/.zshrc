@@ -149,3 +149,5 @@ if [[ $ZSH_PROMPT_ENGINE == "ohmyposh" ]]; then
   eval "$(oh-my-posh init zsh --config $LINUX_SETUP_HOME/configs/kim7s.darkblood.toml)"
   source $LINUX_SETUP_HOME/configs/set_poshcontext.sh
 fi
+
+source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh

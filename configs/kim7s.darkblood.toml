@@ -49,6 +49,7 @@ k8sSymbol = ""
         "/home/escobar/Documents/linux-setup" = '<p:fgray></> env-setup'
         "/home/escobar/sas" = "<p:sasblue>󰀝 sas</>"
         "/home/escobar/Documents/kim7s-knowledge-base" = ' knowledge'
+        "/home/escobar/github/steering-k8s" = ' k8s-talk'
 
   [[blocks.segments]]
     interactive = true
@@ -83,7 +84,7 @@ k8sSymbol = ""
     background = 'p:bgray'
     foreground = 'p:fgray'
     type = 'kubectl'
-    template = '{{if contains "prod" .Context }}<p:warnred> {{.Var.CarefulSymbol}}{{ else }} <p:normalblue> {{ end }}{{ .Var.k8sSymbol }} {{ .Context }} @ {{ if .Namespace}}{{.Namespace}}{{else}}default{{end}} </>{{.Var.Divider}}'
+    template = '{{if contains "prod" .Context }}<p:warnred> {{.Var.CarefulSymbol}}{{ else }} <p:normalblue> {{ end }}{{ .Var.k8sSymbol }} {{ .Context }} </>{{.Var.Divider}}'
     style = 'plain'
   [[blocks.segments]]
     type = "az"

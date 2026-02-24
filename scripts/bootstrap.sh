@@ -19,7 +19,7 @@ unzip 0xProto.zip -d ~/.local/share/fonts/ && \
 rm RobotoMono.zip 0xProto.zip
 
 echo "Configure cinnamon settings"
-dconf load /org/cinnamon/ < $LINUX_SETUP_HOME/configs/cinnamon-settings.conf  
+dconf load /org/cinnamon/ < $LINUX_SETUP_HOME/configs/cinnamon-settings.conf
 
 echo "Installing zsh and oh my zsh"
 sudo apt install zsh -y
@@ -70,5 +70,7 @@ cp $LINUX_SETUP_HOME/configs/.zshrc $HOME/.zshrc
 cp $LINUX_SETUP_HOME/configs/.custom.envs $HOME/.custom.envs
 
 echo ". $HOME/.custom.envs" >> "$HOME/.zshenv"
+
+sudo apt install -y zsh-syntax-highlighting
 
 echo "Restart the session"
